@@ -1,0 +1,23 @@
+{
+  "port": "3000",
+  "adminAccount": "admin@admin.com",
+  "timeout":120000,
+  "db": {
+    "servername": "192.2.40.169",
+    "DATABASE": "admin",
+    "port": 27017,
+    "user": "admin",
+    "pass": "ikasinfo123",
+    "authSource": ""
+  },
+  "mail": {
+    "enable": true,
+    "host": "smtp.qiye.aliyun.com",
+    "port": 465,
+    "from": "xu.jianguo@ikasinfo.com",
+    "auth": {
+      "user": "xu.jianguo",
+      "pass": "Winnie1121"
+    }
+  }
+}

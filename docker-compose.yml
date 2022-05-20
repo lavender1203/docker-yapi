@@ -2,15 +2,17 @@
 version: '3.1'
 
 services:
-  mongo:
-    image: mongo:4
+  mongo-yapi:
+    image: mongo:4.2
+    container_name: mongo-yapi
     restart: always
+    command: [--auth]
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-      MONGO_INITDB_DATABASE: yapi
+      - MONGO_INITDB_ROOT_USERNAME=admin 
+      - MONGO_INITDB_ROOT_PASSWORD=ikasinfo123 
+        #- MONGO_INITDB_DATABASE=yapi
     volumes: 
-        - ./mongo-conf:/docker-entrypoint-initdb.d
+    #- ./mongo-conf:/docker-entrypoint-initdb.d
         - ./mongo/etc:/etc/mongo
         - ./mongo/data/db:/data/db
     ports: 
@@ -25,14 +27,15 @@ services:
       context: ./
       dockerfile: Dockerfile
     image: yapi
+    container_name: yapi
     # 第一次启动使用
     # command: "yapi server"
     # 之后使用下面的命令
-    command: "node /my-yapi/vendors/server/app.js"
+    command: "node server/app.js"
     volumes: 
-        - ./my-yapi:/my-yapi
+      - ./my-yapi:/my-yapi
     ports: 
       - 9090:9090
       - 3000:3000
     depends_on: 
-      - mongo
+      - mongo-yapi
