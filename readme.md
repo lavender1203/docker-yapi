@@ -11,24 +11,17 @@ YApi:  https://github.com/YMFE/yapi/releases
 1. 初始化db, 开启自定义配置
 
 ```
-git clone https://github.com/Ryan-Miao/docker-yapi.git
+git clone https://github.com/lavender1203/docker-yapi.git
 cd docker-yapi
 docker-compose up
 ```
 
-打开 localhost:9090
-
-- 默认部署路径为`/my-yapi`(需要修改docker-compose.yml才可以更改)
-- 修改管理员邮箱 `ryan.miao@demo.com` (随意, 修改为自己的邮箱)
-- 修改数据库地址为 `mongo` 或者修改为自己的mongo实例 (docker-compose配置的mongo服务名称叫mongo)
+- 默认部署路径为`/app/yapi`(需要修改docker-compose.yml才可以更改)
+- 修改管理员邮箱 `admin@admin.com` (随意, 修改为自己的邮箱)
+- 修改数据库地址为 `ip` 或者修改为自己的mongo实例 (docker-compose配置的mongo服务名称叫mongo-yapi)
 - 打开数据库认证
-- 输入数据库用户名: `yapi`(mongo配置的用户名, 见mongo-conf/init-mongo.js)
-- 输入密码: `yapi123456`(mongo配置的密码, 见mongo-conf/init-mongo.js)
-
-点击开始部署.
-
-![](doc/init.jpg)
-![](doc/init-2.jpg)
+- 输入数据库用户名: `admin`(mongo配置的用户名, 见mongo-conf/init-mongo.js)
+- 输入密码: `ikasinfo123`(mongo配置的密码, 见mongo-conf/init-mongo.js)
 
 2. 部署完毕后, 修改docker-compose.yml
 启用
@@ -53,8 +46,8 @@ docker-compose up
 
 访问 localhost:3000
 
-- 输入用户名ryan.miao@demo.com(自己输入的管理员邮箱)
-- 输入密码ymfe.org(默认的初始化密码, 之后可以修改)
+- 输入用户名admin@admin.com(自己输入的管理员邮箱)
+- 输入密码ikasinfo123(默认的初始化密码, 之后可以修改)
 
 然后可以导入一个swagger的接口数据试试:
 
@@ -87,9 +80,9 @@ docker-compose up -d
 
 **部署路径**
 
-容器采用的`node:12-alpine` 这个镜像, yapi部署目录默认为`my-yapi`. 这里已经映射到本地磁盘, 也可以自己挂载想要的数据盘.
+容器采用的`node:12-alpine` 这个镜像, yapi部署目录默认为`/app/yapi`. 这里已经映射到本地磁盘, 也可以自己挂载想要的数据盘.
 
-在docker-compose中配置了, 本地目录映射到容器目录`my-yapi`
+在docker-compose中配置了, 本地目录映射到容器目录`yapi`
 
 ```
     volumes: 
