@@ -8,15 +8,15 @@ services:
     restart: always
     command: [--auth]
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin 
-      - MONGO_INITDB_ROOT_PASSWORD=ikasinfo123 
-        #- MONGO_INITDB_DATABASE=yapi
+      MONGO_INITDB_ROOT_USERNAME: admin 
+      MONGO_INITDB_ROOT_PASSWORD: ikasinfo123 
+      MONGO_INITDB_DATABASE: yapi
     volumes: 
-    #- ./mongo-conf:/docker-entrypoint-initdb.d
-        - ./mongo/etc:/etc/mongo
-        - ./mongo/data/db:/data/db
+      - ./mongo-conf:/docker-entrypoint-initdb.d
+      - ./mongo/etc:/etc/mongo
+      - ./mongo/data/db:/data/db
     ports: 
-        - 27017:27017
+      - 27017:27017
     healthcheck:
       test: ["CMD", "netstat -anp | grep 27017"]
       interval: 2m
@@ -32,8 +32,8 @@ services:
     # command: "yapi server"
     # 之后使用下面的命令
     command: "node server/app.js"
-    volumes: 
-      - ./my-yapi:/my-yapi
+    #volumes: 
+    #  - ./my-yapi:/my-yapi
     ports: 
       - 9090:9090
       - 3000:3000
