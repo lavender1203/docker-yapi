@@ -28,14 +28,8 @@ services:
       dockerfile: Dockerfile
     image: yapi
     container_name: yapi
-    # 第一次启动使用
-    # command: "yapi server"
-    # 之后使用下面的命令
     command: "node server/app.js"
-    #volumes: 
-    #  - ./my-yapi:/my-yapi
     ports: 
-      - 9090:9090
       - 3000:3000
     depends_on: 
       - mongo-yapi
