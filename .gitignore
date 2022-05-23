@@ -1,4 +1,5 @@
 yapi.tgz
 mongo/data
 my-yapi
-yapi/vendors/
+yapi/vendors/node_modules/
+yapi/log/
