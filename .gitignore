@@ -3,3 +3,4 @@ mongo/data
 my-yapi
 yapi/vendors/node_modules/
 yapi/log/
+.vscode/
