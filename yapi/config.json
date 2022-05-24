@@ -14,10 +14,10 @@
     "enable": true,
     "host": "smtp.qiye.aliyun.com",
     "port": 465,
-    "from": "xu.jianguo@ikasinfo.com",
+    "from": "xxx@qq.com",
     "auth": {
-      "user": "xu.jianguo",
-      "pass": "Winnie1121"
+      "user": "xxx",
+      "pass": "xxx"
     }
   }
 }
