@@ -2,6 +2,5 @@ yapi.tgz
 mongo/data
 my-yapi
 yapi/vendors/node_modules/
-yapi/vendors/static
 yapi/log/
 .vscode/
