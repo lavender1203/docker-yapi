@@ -89,10 +89,12 @@ const compareVersions = require('compare-versions');
       }
 
       isOAS3 = res.openapi && compareVersions(res.openapi,'3.0.0') >= 0;
+      console.log("1111111111111111111111")
       if (isOAS3) {
         res = openapi2swagger(res);
       }
       res = await handleSwaggerData(res);
+      console.log(res)
       SwaggerData = res;
 
       interfaceData.basePath = res.basePath || '';
@@ -135,13 +137,13 @@ const compareVersions = require('compare-versions');
           }
         });
       });
-
       interfaceData.cats = interfaceData.cats.filter(catData=>{
         let catName = catData.name;
         return _.find(interfaceData.apis, apiData=>{
           return apiData.catname === catName
         })
       })
+      console.log(interfaceData)
 
       return interfaceData;
   }
@@ -162,6 +164,7 @@ const compareVersions = require('compare-versions');
         }
 
         // 如果根路径有 tags，使用根路径 tags,不使用每个接口定义的 tag 做完分类
+        console.log("2222222222222222")
         if(originTags.length > 0 && _.find(originTags, item=>{
           return item.name === data.tags[i]
         })){

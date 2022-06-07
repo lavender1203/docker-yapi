@@ -147,7 +147,10 @@ class ProjectData extends Component {
       let reader = new FileReader();
       reader.readAsText(info.file);
       reader.onload = async res => {
+        // console.log(res.target.result)
+        // 需要处理 add by xujianguo
         res = await importDataModule[this.state.curImportType].run(res.target.result);
+        console.log(res)
         if (this.state.dataSync === 'merge') {
           // 开启同步
           this.showConfirm(res);
@@ -164,6 +167,7 @@ class ProjectData extends Component {
   showConfirm = async res => {
     let that = this;
     let typeid = this.props.match.params.id;
+    console.log(res);
     let apiCollections = res.apis.map(item => {
       return {
         method: item.method,

@@ -7,7 +7,7 @@
     "dev-copy-icon": "cp -r static/iconfont ./",
     "dev-server": " nodemon server/app.js dev -L",
     "install-server": " node server/install.js",
-    "dev-client": "npm run dev-copy-icon && ykit s -p 4000",
+    "dev-client": "npm run dev-copy-icon && ykit s -p 5000",
     "dev": "npm run dev-server & npm run dev-client",
     "start": " node server/app.js",
     "test": "ava",

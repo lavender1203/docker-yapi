@@ -922,6 +922,7 @@ class interfaceController extends baseController {
   }
 
   async addCat(ctx) {
+    let parent_id = 0;
     try {
       let params = ctx.request.body;
       params = yapi.commons.handleParams(params, {
@@ -943,13 +944,56 @@ class interfaceController extends baseController {
       if (!params.name) {
         return (ctx.body = yapi.commons.resReturn(null, 400, '名称不能为空'));
       }
+      // 判断是否有父级目录,如果有父级目录需要先创建父级目录
+      let split_cats = params.name.split("/")
+      if (split_cats.length == 2 && split_cats[0]){
+        console.log(split_cats[0])
+        //判断该分类是否已存在
+        var cat_exist = false
+        try {
+          let result = await this.catModel.list(params.project_id),
+            newResult = [];
+          for (let i = 0, item, list; i < result.length; i++) {
+            item = result[i].toObject();
+            list = await this.Model.listByCatid(item._id);
+            for (let j = 0; j < list.length; j++) {
+              list[j] = list[j].toObject();
+            }
+    
+            item.list = list;
+            newResult[i] = item;
+          }
+          for (let i = 0, item; i < newResult.length; i++){
+            item = newResult[i]
+            if (item.parent_id == 0 && item.name == split_cats[0]){
+              parent_id = item._id
+              cat_exist = true
+            }
+          }
+        } catch (err) {
+          console.log(err)
+        }
+        if (!cat_exist){ // 不存在则新增一个cat
+          let result = await this.catModel.save({
+            name: split_cats[0],
+            project_id: params.project_id,
+            desc: params.desc,
+            uid: this.getUid(),
+            parent_id: 0,  //默认0
+            add_time: yapi.commons.time(),
+            up_time: yapi.commons.time()
+          });
+          console.log(result)
+          parent_id = result._id
+        }
+      }
 
       let result = await this.catModel.save({
         name: params.name,
         project_id: params.project_id,
         desc: params.desc,
         uid: this.getUid(),
-        parent_id: params.parent_id || 0,  //默认0
+        parent_id: params.parent_id || parent_id,  //默认0
         add_time: yapi.commons.time(),
         up_time: yapi.commons.time()
       });
