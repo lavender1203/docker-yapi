@@ -29,6 +29,8 @@ services:
     image: yapi
     container_name: yapi
     command: "node server/app.js"
+    volumes:
+      - ./yapi/vendors:/app/yapi/vendors
     ports: 
       - 3000:3000
     depends_on: 
